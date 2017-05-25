@@ -19,7 +19,11 @@ module RallyEIF
         # Notice that the entire artifact is sent in, so will need
         # to get the value for the specific field using @field_name
         def transform_out(artifact)
+          begin
           other_value = @connection.get_value(artifact, @field_name)
+        rescue ex
+          return @rally_default_value 
+        end
           mapped_value = @enum_mappings[other_value]
           if !mapped_value.nil?
             return mapped_value

@@ -88,3 +88,78 @@ the field values back into the other system:
 
         </OtherFieldHandlers>
     </Connector>
+
+
+### OtherEnhancedConcatFieldHandler
+
+#### Description
+
+    This field handler behaves like the OtherConcatFieldhandler with the
+    following enhancements:
+    (1) allows for customization of the delimiter (OtherConcatFieldHandler uses <br/>)
+    (2) Does not include the fields name in the concatentation
+    (3) Allows for excluding values to be concatenated
+
+    The goal of this field handler is to concatenate fields with a different delimiter,
+    leaving out source field names, and also to provide the ability to conditionally
+    concatenate fields.  
+
+    The use case for this field handler is that a user wants to prepend a Rally User Story Name
+    with the Type of requirement that is coming from QC if the requirement is a Folder or Group type.
+
+    The configuration for this would look like:  
+    <Connector>
+
+    ... field mapping and rally field handlers ...
+
+    <OtherFieldHandlers>
+
+
+      <OtherEnhancedConcatFieldHandler>
+        <FieldName>RQ_REQ_NAME</FieldName>
+        <ConcatFields>
+          <Field>RQ_TYPE_ID</Field>
+        </ConcatFields>
+        <Delimiter>-</Delimiter>
+        <ExcludeValues>User Story,Testing,Functional</ExcludeValues>
+      </OtherEnhancedConcatFieldHandler>
+
+    </OtherFieldHandlers>
+
+    #### Warnings
+
+    This field handler was written to work in one direction (copying and updating
+    FROM OTHER_TO_RALLY) and only is enabled for the transform_out function.  
+
+    #### Configuration
+
+    <Delimiter> is the delimiter to use in the concatenation.  Will default to <br/> if not specified
+    <ExcludeValues> Comma delimited string of values to exclude.  If the value to be concatenated is in this list, then it will not be appended to the destination field.  
+
+    This field handler's configuration lives in the Connector::OtherFieldHandlers
+    node of the XML file.  Be sure to first map the Rally field to the
+    target other system field in the FieldMapping section:
+
+        <Connector>
+          <FieldMapping>
+        ... other fields ...
+              <Field><Rally>Release</Rally><Other>RQ_TARGET_REL</Other></Field>
+          <FieldMapping>
+
+          ... other settings ...
+
+        ... rally field handlers ...
+
+            <OtherFieldHandlers>
+
+            <OtherEnhancedConcatFieldHandler>
+              <FieldName>RQ_REQ_NAME</FieldName>
+              <ConcatFields>
+                <Field>RQ_TYPE_ID</Field>
+              </ConcatFields>
+              <Delimiter>-</Delimiter>
+              <ExcludeValues>User Story,Testing,Functional</ExcludeValues>
+            </OtherEnhancedConcatFieldHandler>
+
+            </OtherFieldHandlers>
+        </Connector>
