@@ -15,7 +15,7 @@ descriptions below try to describe the limitations, be careful.
 
 This field handler behaves like the OtherConditionalEnumFieldhandler except for
 instead of passing the value through to Rally when going from Other to Rally,
-it will use the configured Default value ("RallyDefaultValue").  
+it will instead use the configured Default value ("RallyDefaultValue").  
 
 The goal of this field handler is to map values that are unwanted to a
 default value.  For example, a user wants to migrate data into Agile Central
@@ -28,14 +28,17 @@ The configuration for this would look like:
 ... field mapping and rally field handlers ...
 
 <OtherFieldHandlers>
+
   <OtherConditionalEnumFieldHandlerWithDefault>
     <FieldName>RQ_TARGET_REL</FieldName>
       <Mappings>
-        <Field><Rally>Release 2 (5,6,7)</Rally><Other>xyz</Other></Field>
+        <Field><Rally>Release 1</Rally><Other>QC.Q1</Other></Field>
+        <Field><Rally>Release 2</Rally><Other>QC.Q2</Other></Field>
+        <Field><Rally>Release 3</Rally><Other>QC.Q3</Other></Field>
       </Mappings>
-      <OtherDefaultValue>Release 3 (8,9,10)</OtherDefaultValue>
-      <RallyDefaultValue>Release 1 (1,2,3,4)</RallyDefaultValue>
+      <RallyDefaultValue>Archived Release</RallyDefaultValue>
   </OtherConditionalEnumFieldHandlerWithDefault>
+
 </OtherFieldHandlers>
 
 #### Warnings
@@ -48,6 +51,10 @@ system to Agile Central.  However, going from Agile Central to the
 Other system will result in the default behavior of the
 OtherConditionalEnumFieldHandler, which will be passing the rally value
 through if it is not mapped.
+
+Note that even values that match the values in the destination need to be mapped.
+If values are not mapped in the Mappings tags, then they will be mapped
+to the default value.
 
 #### Configuration
 
