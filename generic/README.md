@@ -69,15 +69,15 @@ the field values back into the other system:
 
         <OtherFieldHandlers>
 
-          <JiraMultiTagFieldHandler>
-            <FieldName>Environments</FieldName>
-            <TagPrefix>ENV</TagPrefix>
-          </JiraMultiTagFieldHandler>
-
-          <JiraMultiTagFieldHandler>
-            <FieldName>Platform</FieldName>
-            <TagPrefix>PLATFORM</TagPrefix>
-          </JiraMultiTagFieldHandler>
+        <OtherConditionalEnumFieldHandlerWithDefault>
+          <FieldName>RQ_TARGET_REL</FieldName>
+            <Mappings>
+              <Field><Rally>Release 1</Rally><Other>QC.Q1</Other></Field>
+              <Field><Rally>Release 2</Rally><Other>QC.Q2</Other></Field>
+              <Field><Rally>Release 3</Rally><Other>QC.Q3</Other></Field>
+            </Mappings>
+            <RallyDefaultValue>Archived Release</RallyDefaultValue>
+        </OtherConditionalEnumFieldHandlerWithDefault>
 
         </OtherFieldHandlers>
     </Connector>
