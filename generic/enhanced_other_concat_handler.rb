@@ -13,7 +13,7 @@ module RallyEIF
           @field_list.each do |field_nm|
             next_val = @connection.get_value(artifact, field_nm)
             if !@exclude_values.include?(next_val.downcase)
-                ret_val << " #{@delimiter} #{next_val}"
+                ret_val = " #{next_val} #{@delimiter} #{ret_val}"
             end
           end
           ret_val
