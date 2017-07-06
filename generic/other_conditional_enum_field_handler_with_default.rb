@@ -22,13 +22,18 @@ module RallyEIF
           begin
           other_value = @connection.get_value(artifact, @field_name)
         rescue ex
-          return @rally_default_value 
+          return @rally_default_value
         end
           mapped_value = @enum_mappings[other_value]
           if !mapped_value.nil?
             return mapped_value
           else
-            return @rally_default_value
+            if (other_value.nil?)
+              return nil
+            else
+              return @rally_default_value
+            end
+
           end
         end
 
