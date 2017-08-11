@@ -1,3 +1,11 @@
+# this overridden versioon of the MirrorStoryHierarchyInQC was written for the
+# purpose of linking requirements (copied from AC Stories) to a Requirement Folder that
+# represents the AC Feature that the story was a child of.
+#
+# The handler assumes that the only requirements copied from AC are direct children
+# of Portfolio ITem Feature, and will break the Post Service Action functionality originally
+# intended for the MirrorStoryHierarchyInQC Post Service Action
+#
 module RallyEIF
   module WRK
 

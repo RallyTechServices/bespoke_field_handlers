@@ -11,6 +11,14 @@
 #
 # *** This is from the code provided by JP Kole and John Martin in the Rally Experiments
 # private repo ***
+#
+# This custom field handler was written to support the ability to pull an attribute
+# from a field on the Requirmeent (in QC) that a Test (or Bug) (in QC) is linked to and then
+# apply the value of that attribute to the Test Case when copying into Agile Central.  The
+# specific scenario for this field handler was to set the project of the test case to be
+# created to the same as the project of the requirement, which is represented by a custom
+# attribute on the Requirement in QC.
+#
 
 module RallyEIF
   module WRK

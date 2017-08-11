@@ -1,3 +1,7 @@
+#
+# The purpose of this override is to support the usage of the CrosslinkUrl field
+# on the QC connection so that the QC link is updated in the corresponding Rally object.
+#
 module RallyEIF
   module WRK
     class QCConnection
